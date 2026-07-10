@@ -1,0 +1,1148 @@
+{
+  "name": "AI Buisness Assistant",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "allowFileUploads": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -944,
+        -176
+      ],
+      "id": "c731fbb1-a655-4a54-8b2e-0ab64a19cf45",
+      "name": "When chat message received",
+      "webhookId": "2d101417-dcdf-4013-8090-42bc70d09492",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "resume",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "e3abc598-2625-4c31-8d65-f61690a58a16"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "ed472e9b-d742-4925-9b12-299f12517616",
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "email",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "bdc5e171-be78-4dbb-8469-da43304c8aad",
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "meeting",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "225a5764-f16b-417f-8552-096aed5b116f",
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "linkedin",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "5e062757-5df3-49c9-8bb0-318a05ce5258",
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "invoice",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "5af58fb7-67bc-4553-aa28-20dccab8d8db",
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "general",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -368,
+        -224
+      ],
+      "id": "716599e9-1a5b-45d8-a55a-e05a1ca3334d",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "model": "deepseek/deepseek-v3.1-terminus",
+        "options": {
+          "maxTokens": 1024,
+          "temperature": 0.3
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -912,
+        80
+      ],
+      "id": "7ee1b030-522d-4a04-afa8-747e98662355",
+      "name": "OpenRouter Chat Model",
+      "notesInFlow": false,
+      "credentials": {
+        "openRouterApi": {
+          "id": "v17IKf6ZpaCL7fRx",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are an HR Resume Screening AI.\n\nAnalyze the resume provided by the user.\n\nReturn ONLY valid JSON.\n\n{\n\"name\":\"\",\n\"email\":\"\",\n\"phone\":\"\",\n\"skills\":[],\n\"experience_years\":\"\",\n\"education\":\"\",\n\"resume_score\":0,\n\"recommendation\":\"\",\n\"missing_skills\":[]\n}\n\nRules:\n\nResume score must be from 1-10.\n\nRecommendation must be one of:\n\nHire\nMaybe\nReject\n\nDo not explain.\n\nReturn JSON only."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -192,
+        -576
+      ],
+      "id": "02ece75b-3c9e-4f36-8b00-fd26926e23f8",
+      "name": "Resume Analyzer"
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxTokens": 1024,
+          "temperature": 0.3
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        528,
+        272
+      ],
+      "id": "3ffb8f58-fdf2-4beb-a0aa-93d3edb48726",
+      "name": "OpenRouter Chat Model1",
+      "credentials": {
+        "openRouterApi": {
+          "id": "v17IKf6ZpaCL7fRx",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = JSON.parse($json.output);\n\nreturn [\n{\njson:data\n}\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        112,
+        -576
+      ],
+      "id": "9a24e710-504d-476a-8a63-d5b223719dc0",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "11-oS8jiaSXR03NW-KayI4EwXScZLRY77lUcl0QlMoGc",
+          "mode": "list",
+          "cachedResultName": "AI AUTOMATION",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/11-oS8jiaSXR03NW-KayI4EwXScZLRY77lUcl0QlMoGc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "resume database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/11-oS8jiaSXR03NW-KayI4EwXScZLRY77lUcl0QlMoGc/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{$json.name}}",
+            "Email": "={{$json.email}}",
+            "Phone": "={{$json.phone}}",
+            "Skills": "={{$json.skills.join(\", \")}}",
+            "Experience": "={{$json.experience_years}}",
+            "Education": "={{$json.education}}",
+            "Score": "={{$json.resume_score}}",
+            "Recommendation": "={{$json.recommendation}}",
+            "Missing Skills": "={{$json.missing_skills.join(\", \")}}",
+            "Candidate Status": "Pending",
+            "Notes": "-",
+            "Processed At": "={{ new Date().toISOString() }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Skills",
+              "displayName": "Skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Experience",
+              "displayName": "Experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Education",
+              "displayName": "Education",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Score",
+              "displayName": "Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Recommendation",
+              "displayName": "Recommendation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Missing Skills",
+              "displayName": "Missing Skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Processed At",
+              "displayName": "Processed At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Candidate Status",
+              "displayName": "Candidate Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        288,
+        -576
+      ],
+      "id": "665c659c-585e-405b-9887-5beb3a45cad8",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "UsXxWxcHBCLTYGBH",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are an expert HR email writer.\n\nWrite professional emails.\n\nKeep them concise.\n\nReturn only the email body.\n\nNo explanations."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -192,
+        -448
+      ],
+      "id": "d07b7975-5cae-40e6-98c2-ac1e5e18ebcf",
+      "name": "Email Writer"
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxTokens": 1024,
+          "temperature": 0.3
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        752,
+        272
+      ],
+      "id": "7efb44e9-9878-4081-97f9-c5985f4696d4",
+      "name": "OpenRouter Chat Model2",
+      "credentials": {
+        "openRouterApi": {
+          "id": "v17IKf6ZpaCL7fRx",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxTokens": 1024,
+          "temperature": 0.3
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        144,
+        272
+      ],
+      "id": "b318fd4c-1790-46d7-b62f-0a7aadaf5e90",
+      "name": "OpenRouter Chat Model3",
+      "credentials": {
+        "openRouterApi": {
+          "id": "v17IKf6ZpaCL7fRx",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Summarize meeting notes.\n\nReturn:\n\nSummary\n\nAction Items\n\nKey Decisions\n\nNext Meeting"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -192,
+        -288
+      ],
+      "id": "47f8cd15-03aa-4f63-a905-63ea41829613",
+      "name": "Meeting Tool"
+    },
+    {
+      "parameters": {
+        "folderId": "default",
+        "title": "=Meeting Summary - {{ new Date().toLocaleDateString() }}"
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        96,
+        -288
+      ],
+      "id": "95091aa6-20f1-4ba5-8417-345cdbc68184",
+      "name": "Create a document",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "0DR0vaRwTO1AXRsS",
+          "name": "Google Docs OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Create a professional LinkedIn post.\n\nUse emojis.\n\nUse hashtags.\n\nReturn only the final post."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -176,
+        -144
+      ],
+      "id": "8690d02d-c869-4e59-9fec-8fd3a79af630",
+      "name": "Linkedin tool"
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxTokens": 1024,
+          "temperature": 0.3
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        416,
+        272
+      ],
+      "id": "64e6c379-78a4-4653-ae44-09b3ee802793",
+      "name": "OpenRouter Chat Model4",
+      "credentials": {
+        "openRouterApi": {
+          "id": "v17IKf6ZpaCL7fRx",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are an invoice generator.\n\nReturn ONLY valid JSON.\n\nExample:\n\n{\n  \"client_name\":\"ABC Company\",\n  \"service\":\"Website Development\",\n  \"amount\":\"1500\",\n  \"invoice\":\"Dear ABC Company,\\n\\nInvoice for Website Development.\\nAmount Due: $1500.\\n\\nThank you.\"\n}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -224,
+        16
+      ],
+      "id": "37b2fe1f-6ac7-47d5-8aab-c9d09535f70b",
+      "name": "Invoice Tool"
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxTokens": 1024,
+          "temperature": 0.3
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        272,
+        272
+      ],
+      "id": "a85f0ead-9d48-419d-955d-7846c4f5b940",
+      "name": "OpenRouter Chat Model5",
+      "credentials": {
+        "openRouterApi": {
+          "id": "v17IKf6ZpaCL7fRx",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an AI Business Assistant.\n\nYour job is to determine what the user wants.\n\nPossible intents:\n\nresume\nemail\nmeeting\nlinkedin\ninvoice\ngeneral\n\nNever answer directly.\n\nAlways return ONLY valid JSON.\n\nExample:\n\n{\n\"intent\":\"resume\"\n}\n\nIf the request is to write an email:\n\n{\n\"intent\":\"email\"\n}\n\nIf it is meeting notes:\n\n{\n\"intent\":\"meeting\"\n}\n\nIf it is LinkedIn:\n\n{\n\"intent\":\"linkedin\"\n}\n\nIf it is invoice:\n\n{\n\"intent\":\"invoice\"\n}\n\nOtherwise:\n\n{\n\"intent\":\"general\"\n}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -800,
+        -176
+      ],
+      "id": "25bffe29-5e14-4b93-9659-ec8b2f36a968",
+      "name": "Intent Router"
+    },
+    {
+      "parameters": {
+        "folderId": "default",
+        "title": "Linkedin post"
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        144,
+        -144
+      ],
+      "id": "a56ef2dd-0ba0-4ef1-9d00-a1a6ca27ea79",
+      "name": "Create a document1",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "0DR0vaRwTO1AXRsS",
+          "name": "Google Docs OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{$node[\"Create a document1\"].json.id}}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{$node[\"Linkedin tool\"].json.output}}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        352,
+        -144
+      ],
+      "id": "cafd794d-7e92-410c-8ea0-8f0c04172dd1",
+      "name": "Update a document",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "0DR0vaRwTO1AXRsS",
+          "name": "Google Docs OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "folderId": "default",
+        "title": "Email"
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        160,
+        -448
+      ],
+      "id": "5fb9e135-8f55-4661-8559-afc76616af37",
+      "name": "Create a document2",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "0DR0vaRwTO1AXRsS",
+          "name": "Google Docs OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{$node[\"Email Writer\"].json.output}}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        368,
+        -448
+      ],
+      "id": "0ae72382-10b6-4488-8cb6-9e3599d27835",
+      "name": "Update a document1",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "0DR0vaRwTO1AXRsS",
+          "name": "Google Docs OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "let text = $json.output;\n\n// Remove markdown code fences if present\ntext = text.replace(/```json/g, \"\");\ntext = text.replace(/```/g, \"\");\ntext = text.trim();\n\nconst result = JSON.parse(text);\n\nreturn [\n  {\n    json: {\n      intent: result.intent,\n      chatInput: $('When chat message received').first().json.chatInput\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -512,
+        -144
+      ],
+      "id": "7f3a1375-b078-45dc-ba3f-e671ef2a7549",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{$node[\"Create a document\"].json.id}}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{$node[\"Meeting Tool\"].json.output}}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        304,
+        -288
+      ],
+      "id": "72d5e4fc-2876-4b26-9076-e7a856bcfb16",
+      "name": "Update a document2",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "0DR0vaRwTO1AXRsS",
+          "name": "Google Docs OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "11-oS8jiaSXR03NW-KayI4EwXScZLRY77lUcl0QlMoGc",
+          "mode": "list",
+          "cachedResultName": "AI AUTOMATION",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/11-oS8jiaSXR03NW-KayI4EwXScZLRY77lUcl0QlMoGc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1223620943,
+          "mode": "list",
+          "cachedResultName": "Invoice database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/11-oS8jiaSXR03NW-KayI4EwXScZLRY77lUcl0QlMoGc/edit#gid=1223620943"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Invoice No": "={{ \"INV-\" + Date.now() }}",
+            "Client": "={{ JSON.parse($json.output).client_name }}",
+            "Service": "={{ JSON.parse($json.output).service }}",
+            "Amount": "={{ JSON.parse($json.output).amount }}",
+            "Date": "={{ new Date().toLocaleDateString() }}",
+            "Status": "Pending"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Invoice No",
+              "displayName": "Invoice No",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Client",
+              "displayName": "Client",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Service",
+              "displayName": "Service",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Amount",
+              "displayName": "Amount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        96,
+        16
+      ],
+      "id": "66c09dcb-a131-48ac-8048-164202bc4fdc",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "UsXxWxcHBCLTYGBH",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are an AI Business Assistant.\n\nYou help users with any business-related question that is not about:\n\n- Resume analysis\n- Email writing\n- Meeting notes\n- LinkedIn posts\n- Invoice generation\n\nYou can help with:\n\n- Business ideas\n- Marketing\n- Startup advice\n- Productivity\n- AI tools\n- Automation\n- Customer service\n- Sales\n- Finance\n- HR\n- General business questions\n\nAlways provide clear, professional and detailed answers.\n\nReturn only the final answer."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -224,
+        208
+      ],
+      "id": "614b43cb-83b6-4d1b-8ecd-b3c6d6445af9",
+      "name": "General Assistant"
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxTokens": 1024,
+          "temperature": 0.3
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        656,
+        272
+      ],
+      "id": "18ec4a87-7d3d-4fcb-81ea-9830f558a9a8",
+      "name": "OpenRouter Chat Model6",
+      "credentials": {
+        "openRouterApi": {
+          "id": "v17IKf6ZpaCL7fRx",
+          "name": "OpenRouter account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Intent Router",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Resume Analyzer",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Email Writer",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Meeting Tool",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Linkedin tool",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Invoice Tool",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "General Assistant",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Intent Router",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Resume Analyzer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Resume Analyzer": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Email Writer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Writer": {
+      "main": [
+        [
+          {
+            "node": "Create a document2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Meeting Tool",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Meeting Tool": {
+      "main": [
+        [
+          {
+            "node": "Create a document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Linkedin tool",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Linkedin tool": {
+      "main": [
+        [
+          {
+            "node": "Create a document1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model5": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Invoice Tool",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Invoice Tool": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Intent Router": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a document1": {
+      "main": [
+        [
+          {
+            "node": "Update a document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a document": {
+      "main": [
+        [
+          {
+            "node": "Update a document2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a document2": {
+      "main": [
+        [
+          {
+            "node": "Update a document1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model6": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "General Assistant",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "0e660419-439f-4540-9b78-d58c1b628dc9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "433f78e6ef96c8dfac8dc8f4c67fc89da5823557a79db0c1093e73338e799727"
+  },
+  "nodeGroups": [],
+  "id": "RjWwNW329VzkqJwY",
+  "tags": []
+}
