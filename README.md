@@ -15,22 +15,22 @@ https://youtu.be/BSus61RA0T4
   <br>
   
   ### 1. Intent Routing Flow
-  ![Intent Router](screenshots/Screenshot 2026-07-10 211905.png)
+  ![Intent Router](<screenshots/Screenshot 2026-07-10 211905.png>)
   
   ### 2. Resume ATS Analyzer
-  ![ATS Scoring](screenshots/Screenshot 2026-07-10 202826.png)
+  ![ATS Scoring](<screenshots/Screenshot 2026-07-10 202826.png>)
   
   ### 3. Linkedin Post
-  ![Database Sheet](screenshots/Screenshot 2026-07-10 202855.png)
+  ![Database Sheet](<screenshots/Screenshot 2026-07-10 202855.png>)
 
   ### 4. Meeting Summarizer
-  ![Meeting Notes](screenshots/Screenshot 2026-07-10 203022.png)
+  ![Meeting Notes](<screenshots/Screenshot 2026-07-10 203022.png>)
 
   ### 5. Invoice Generator
-  ![Invoice Tool](screenshots/Screenshot 2026-07-10 202951.png)
+  ![Invoice Tool](<screenshots/Screenshot 2026-07-10 202951.png>)
 
   ### 6. Email Writer & General Assistant
-  ![Email Assistant](screenshots/Screenshot 2026-07-10 202926.png)
+  ![Email Assistant](<screenshots/Screenshot 2026-07-10 202926.png>)
 </details>
 
 ## 🚀 Features
