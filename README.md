@@ -6,6 +6,33 @@ An AI-powered Business Assistant built using **n8n**, **OpenRouter**, and **Goog
 
 https://youtu.be/BSus61RA0T4
 
+
+## 📸 Screenshots
+
+
+<details>
+  <summary>📸 Click here to view Project Screenshots</summary>
+  <br>
+  
+  ### 1. Intent Routing Flow
+  ![Intent Router](./screenshots/Screenshot 2026-07-10 202736.png)
+  
+  ### 2. Resume ATS Analyzer
+  ![ATS Scoring](./screenshots/Screenshot 2026-07-10 202826.png)
+  
+  ### 3. Google Sheets Automation
+  ![Database Sheet](./screenshots/Screenshot 2026-07-10 202855.png)
+
+  ### 4. Meeting Summarizer
+  ![Meeting Notes](./screenshots/Screenshot 2026-07-10 202926.png)
+
+  ### 5. Invoice Generator
+  ![Invoice Tool](./screenshots/Screenshot 2026-07-10 202951.png)
+
+  ### 6. Email Writer & General Assistant
+  ![Email Assistant](./screenshots/Screenshot 2026-07-10 203022.png)
+</details>
+
 ## 🚀 Features
 
 - 📄 Resume ATS Analysis
@@ -99,33 +126,6 @@ Switch Node
 
 ---
 
-## 📸 Screenshots
-
-
-<details>
-  <summary>📸 Click here to view Project Screenshots</summary>
-  <br>
-  
-  ### 1. Intent Routing Flow
-  ![Intent Router](./screenshots/Screenshot 2026-07-10 202736.png)
-  
-  ### 2. Resume ATS Analyzer
-  ![ATS Scoring](./screenshots/Screenshot 2026-07-10 202826.png)
-  
-  ### 3. Google Sheets Automation
-  ![Database Sheet](./screenshots/Screenshot 2026-07-10 202855.png)
-
-  ### 4. Meeting Summarizer
-  ![Meeting Notes](./screenshots/Screenshot 2026-07-10 202926.png)
-
-  ### 5. Invoice Generator
-  ![Invoice Tool](./screenshots/Screenshot 2026-07-10 202951.png)
-
-  ### 6. Email Writer & General Assistant
-  ![Email Assistant](./screenshots/Screenshot 2026-07-10 203022.png)
-</details>
-
----
 
 ## 🔮 Future Improvements
 
