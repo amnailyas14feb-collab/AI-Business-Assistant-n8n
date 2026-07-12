@@ -2,7 +2,9 @@
 
 An AI-powered Business Assistant built using **n8n**, **OpenRouter**, and **Google Workspace APIs**. The assistant intelligently detects user intent and automates multiple business tasks through a single conversational interface.
 
----
+## 🎥 Demo Video
+
+https://youtu.be/BSus61RA0T4
 
 ## 🚀 Features
 
