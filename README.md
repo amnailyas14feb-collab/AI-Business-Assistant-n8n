@@ -101,29 +101,29 @@ Switch Node
 
 ## 📸 Screenshots
 
-### Workflow
-<img width="1169" height="593" alt="image" src="https://github.com/user-attachments/assets/c0384211-6f1e-4061-8059-85c9099240e5" />
 
+<details>
+  <summary>📸 Click here to view Project Screenshots</summary>
+  <br>
+  
+  ### 1. Intent Routing Flow
+  ![Intent Router](./screenshots/Screenshot 2026-07-10 202736.png)
+  
+  ### 2. Resume ATS Analyzer
+  ![ATS Scoring](./screenshots/Screenshot 2026-07-10 202826.png)
+  
+  ### 3. Google Sheets Automation
+  ![Database Sheet](./screenshots/Screenshot 2026-07-10 202855.png)
 
-### Resume Analyzer
-<img width="1362" height="684" alt="image" src="https://github.com/user-attachments/assets/98b5e7cb-a6e0-4660-a578-7f5dea5b3c23" />
+  ### 4. Meeting Summarizer
+  ![Meeting Notes](./screenshots/Screenshot 2026-07-10 202926.png)
 
+  ### 5. Invoice Generator
+  ![Invoice Tool](./screenshots/Screenshot 2026-07-10 202951.png)
 
-### LinkedIn Generator
-<img width="1357" height="632" alt="image" src="https://github.com/user-attachments/assets/7a2ae5d3-8247-44e6-a4ce-51110c26657a" />
-
-
-### Email Writer
-<img width="1346" height="767" alt="image" src="https://github.com/user-attachments/assets/76f35dad-a6ee-4992-aec3-d08c2618968b" />
-
-
-### Invoice Generator
-<img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/443a88a3-ff2e-41d4-a819-a11ec5929d72" />
-
-
-### Meeting Tool
-<img width="1365" height="756" alt="image" src="https://github.com/user-attachments/assets/3dbd342c-810a-401a-8f56-8fa2ee5b4e37" />
-
+  ### 6. Email Writer & General Assistant
+  ![Email Assistant](./screenshots/Screenshot 2026-07-10 203022.png)
+</details>
 
 ---
 
